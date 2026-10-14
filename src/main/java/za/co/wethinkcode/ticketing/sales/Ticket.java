@@ -1,63 +1,73 @@
 package za.co.wethinkcode.ticketing.sales;
 
-public class Ticket {
+public abstract class Ticket {
 
-    // TODO: declare the private fields
+    private final String ticketId;
+    private final String holderName;
+    private String seatLable;
+    private double price;
+    private  boolean used = false;
+
+
 
     public Ticket(String ticketId, String holderName, String seatLabel, double price) {
-        // TODO: implement the constructor
-        throw new UnsupportedOperationException("TODO");
+        this.ticketId = ticketId;
+        this.holderName = holderName;
+        this.seatLable = seatLabel; 
+        if(price <= 0){throw new IllegalArgumentException("price cannot be R0 or less");}
+        this.price = price;
+        this.used = false;
     }
 
     public String getTicketId() {
-        throw new UnsupportedOperationException("TODO");
+       return ticketId;
     }
 
     public String getHolderName() {
-        throw new UnsupportedOperationException("TODO");
+        return holderName;
     }
 
     public String getSeatLabel() {
-        throw new UnsupportedOperationException("TODO");
+        return  seatLable;
     }
 
     public void updateSeatLabel(String seatLabel) {
-        throw new UnsupportedOperationException("TODO");
+        if(used){throw new IllegalArgumentException();}
+        this.seatLable = seatLabel;
     }
 
     public double getPrice() {
-        throw new UnsupportedOperationException("TODO");
+       return price;
     }
 
     public void updatePrice(double price) {
-        throw new UnsupportedOperationException("TODO");
+       if(price <= 0){throw new IllegalArgumentException();}
+       this.price = price;
     }
 
     public boolean isUsed() {
-        throw new UnsupportedOperationException("TODO");
+        return used;
     }
 
     public void markUsed() {
-        throw new UnsupportedOperationException("TODO");
+        this.used = true;
     }
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("TODO");
+       return  "ticket id" + getTicketId() + 
+       "holder's name" + getHolderName();
     }
 
     /** Returns the total the customer pays for this ticket, in Rands. */
-    public double totalCost() {
-        throw new UnsupportedOperationException("TODO");
-    }
+    public abstract double totalCost();
+
+
 
     /** Returns the gate this ticket's holder must use. */
-    public String entryGate() {
-        throw new UnsupportedOperationException("TODO");
-    }
+    public abstract String entryGate() ;
 
     /** Returns a short label for this kind of ticket, e.g. "General". */
-    public String ticketClass() {
-        throw new UnsupportedOperationException("TODO");
-    }
+    public abstract String ticketClass();
+    
 }

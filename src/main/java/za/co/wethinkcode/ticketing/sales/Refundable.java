@@ -11,7 +11,7 @@ public interface Refundable {
      * @return refund amount
      */
     double refundAmount();
-
+///
     /**
      * Returns how many days before the event a refund can still be requested.
      *

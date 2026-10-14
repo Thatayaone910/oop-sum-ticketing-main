@@ -26,23 +26,23 @@ public class VipTicket extends Ticket implements Refundable {
     }
 
     public String entryGate() {
-        throw new UnsupportedOperationException("TODO");
+        return ENTRY_GATE;
     }
 
     public String ticketClass() {
-        throw new UnsupportedOperationException("TODO");
+        return "VIP";
     }
 
     public double refundAmount() {
-        throw new UnsupportedOperationException("TODO");
+        return getPrice() * REFUND_RATE;
     }
 
     public int refundWindowDays() {
-        throw new UnsupportedOperationException("TODO");
+        return REFUND_WINDOW_DAYS;
     }
 
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("TODO");
+        return super.toString() + "VIP" + getPerks();
     }
 }

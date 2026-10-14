@@ -1,41 +1,73 @@
 package za.co.wethinkcode.ticketing.sales;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import javax.security.auth.callback.TextInputCallback;
 
 public class BoxOffice {
 
     // TODO: declare the private fields
+    private final String VenueName;
+    private List<Ticket> tickets;
 
     public BoxOffice(String venueName) {
         // TODO: implement the constructor
-        throw new UnsupportedOperationException("TODO");
+        this.VenueName = venueName;
+        this.tickets = new ArrayList<>();
     }
 
     public String getVenueName() {
-        throw new UnsupportedOperationException("TODO");
+        return  VenueName;
     }
 
     public void addTicket(Ticket ticket) {
-        throw new UnsupportedOperationException("TODO");
+        for(Ticket t :  tickets){
+            if(t.equals(ticket) ){
+                throw new IllegalArgumentException();
+            }
+           
+        }
+        tickets.add(ticket);
     }
 
     public Ticket findTicket(String ticketId) {
-        throw new UnsupportedOperationException("TODO");
+       for(Ticket t : tickets){
+        if(t.getTicketId().equals(ticketId)){
+            return t;
+        }};
+        return null;
     }
 
     public List<Ticket> getTickets() {
-        throw new UnsupportedOperationException("TODO");
+        return Collections.unmodifiableList(tickets);
     }
 
     public List<Refundable> refundableTickets() {
-        throw new UnsupportedOperationException("TODO");
+        List<Refundable> refundable = new ArrayList<>();
+
+        for (Ticket t: tickets)
+            if (t instanceof Refundable)
+            {refundable.add(t); }
+        return refundable;
+        
     }
 
     public double totalRevenue() {
-        throw new UnsupportedOperationException("TODO");
+        double sum = 0.0;
+        for (Ticket t : tickets) {
+            sum += t.totalCost();
+        }
+        return sum;
     }
 
     public double totalRefundLiability() {
-        throw new UnsupportedOperationException("TODO");
+        double sumRefunds = 0.0;
+        for (Ticket t : tickets){
+            if(t instanceof Refundable)
+            sumRefunds += ((Refundable)t).refundAmount();
+        }
+        return sumRefunds;
     }
 }
